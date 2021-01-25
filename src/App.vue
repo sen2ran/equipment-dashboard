@@ -28,6 +28,7 @@
       <div
         class="flex flex-col lg:flex-row w-full lg:space-x-2 space-y-2 lg:space-y-0 mb-2 lg:mb-4"
       >
+        <!-- card component used to show the Operational and Non-Operational data -->
         <Card :name="`Operational`" :value="operationalCount" />
         <Card :name="`Non-Operational`" :value="nonOperationalCount" />
       </div>
@@ -35,7 +36,8 @@
       <div
         class="w-full p-4 rounded-lg bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-800"
       >
-        <!-- Add key for rerender the component -->
+        <!-- Chart component use to show chart UI -->
+        <!-- Added key for rerender the component -->
         <Chart :chartData="chartData" :key="rowId" />
       </div>
     </div>
@@ -43,6 +45,9 @@
 </template>
 
 <script>
+/**
+ * Import section
+ */
 import { onMounted, reactive, toRefs } from "vue";
 import Chart from "./components/Chart";
 import Card from "./components/Common/Card";
@@ -55,6 +60,10 @@ export default {
     Card,
   },
   setup() {
+    /**
+     * asset Data
+     * [*] Default data represent at the beginning
+     */
     const assetData = reactive({
       isLoading: false,
       rowId: 0,
@@ -63,9 +72,14 @@ export default {
       nonOperationalCount: 0,
       chartData: {},
     });
+
     onMounted(async () => {
       /**
-       * Check localStorage if exist seting value to vue data and calling API
+       * Checking localStorage
+       * 1> check the data is exist in localStorage,
+       *  1.1> if yes data will be added to  asset Data and call the api endpoint with last row id
+       *
+       * 2 > if not api endpoint will trigger with defult value
        */
       if (localStorage.getItem("asset-data")) {
         let tmpassetData = JSON.parse(localStorage.getItem("asset-data"));
@@ -83,7 +97,8 @@ export default {
     });
 
     /**
-     * recursivley call the api till return empty Array
+     * Recursive funtions
+     * Recursivley call the api endpoint till return empty array
      */
     const getAllAssetsFn = async (payload) => {
       try {
@@ -92,21 +107,24 @@ export default {
           assetData.rowId = data[data.length - 1].__rowid__;
           filterFn(data);
           setTimeout(async () => {
+            // setTimeout is for better UI
             let payload = {
               rowId: assetData.rowId,
               limit: assetData.limit,
             };
             await getAllAssetsFn(payload);
-          }, 1000); // for UI
+          }, 1000);
         } else {
           assetData.isLoading = false;
-          console.log("Done");
         }
       } catch (error) {
+        console.log(error);
         assetData.isLoading = false;
       }
     };
-
+    /**
+     * Handling the count data and graph data
+     */
     const filterFn = (data) => {
       for (let i = 0; i < data.length; i++) {
         operationalCountFn(data[i]);
@@ -115,7 +133,7 @@ export default {
       localStorage.setItem("asset-data", JSON.stringify(assetData));
     };
     /**
-     * Adding count and Operational and Non-Operational
+     * Adding count to Operational and Non-Operational
      */
     const operationalCountFn = (data) => {
       data.OperationalStatus == "Operational"
@@ -123,7 +141,7 @@ export default {
         : (assetData.nonOperationalCount = assetData.nonOperationalCount + 1);
     };
     /**
-     * Adding count to Category Type
+     * Adding count to Categories Types
      */
     const filterEquipmentTypeFn = (data) => {
       let chartData = { ...assetData.chartData };
@@ -134,7 +152,7 @@ export default {
       assetData.chartData = chartData;
     };
     /**
-     * Reset to default data and call the Api
+     * This fn is used Reset the default data and call the Api endpoint
      */
     const resetFn = async () => {
       localStorage.removeItem("asset-data");
@@ -152,7 +170,7 @@ export default {
       await getAllAssetsFn(payload);
     };
     /**
-     * Call the api from last id
+     * This fn is used fetch latest data from the api endpoint
      */
     const updateFn = async () => {
       assetData.isLoading = true;

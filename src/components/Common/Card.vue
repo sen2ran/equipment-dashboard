@@ -14,8 +14,11 @@
     </div>
   </div>
 </template>
-
 <script>
+/**
+ * This component is user for represet Operational, Non-Operational Details
+ * Name and value are come from parent component through props
+ */
 export default {
   name: "DashboardCard",
   props: ["name", "value"],

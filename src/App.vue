@@ -35,7 +35,7 @@
       <div
         class="w-full p-4 rounded-lg bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-800"
       >
-        <!-- Add ket for rerender the component -->
+        <!-- Add key for rerender the component -->
         <Chart :chartData="chartData" :key="rowId" />
       </div>
     </div>

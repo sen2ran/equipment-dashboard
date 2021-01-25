@@ -18,6 +18,8 @@ $ npm install
 $ npm run serve
 ```
 
+For browser to call the api endpoint, have to add CORS...
+
 [Vue 3]: <https://v3.vuejs.org/>
 [Apexcharts.JS]: <https://apexcharts.com/>
 [Tailwindcss]: <https://tailwindcss.com/>

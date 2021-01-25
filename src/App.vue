@@ -63,6 +63,9 @@ export default {
       chartData: {},
     });
     onMounted(async () => {
+      /**
+       * Check localStorage if exist seting value to vue data and calling API
+       */
       if (localStorage.getItem("asset-data")) {
         let tmpassetData = JSON.parse(localStorage.getItem("asset-data"));
         assetData.rowId = tmpassetData.rowId;
@@ -78,6 +81,9 @@ export default {
       await getAllAssetsFn(payload);
     });
 
+    /**
+     * recursivley call the api till return empty Array
+     */
     const getAllAssetsFn = async (payload) => {
       try {
         let { data } = await GetAllAssets(payload);
@@ -90,7 +96,7 @@ export default {
               limit: assetData.limit,
             };
             await getAllAssetsFn(payload);
-          }, 1000);
+          }, 1000);  // for UI  
         } else {
           assetData.isLoading = false;
           console.log("Done");
@@ -107,13 +113,17 @@ export default {
       }
       localStorage.setItem("asset-data", JSON.stringify(assetData));
     };
-
+    /**
+     * Adding count and Operational and Non-Operational
+     */
     const operationalCountFn = (data) => {
       data.OperationalStatus == "Operational"
         ? (assetData.operationalCount = assetData.operationalCount + 1)
         : (assetData.nonOperationalCount = assetData.nonOperationalCount + 1);
     };
-
+    /**
+     * Adding count to Category Type
+     */
     const filterEquipmentTypeFn = (data) => {
       let chartData = { ...assetData.chartData };
       Object.prototype.hasOwnProperty.call(chartData, data.AssetCategoryID)
@@ -122,7 +132,9 @@ export default {
         : (chartData[data.AssetCategoryID] = 1);
       assetData.chartData = chartData;
     };
-
+    /**
+     * Reset to default data and call the Api
+     */
     const resetFn = async () => {
       localStorage.removeItem("asset-data");
       assetData.rowId = 0;
@@ -138,6 +150,9 @@ export default {
       assetData.isLoading = true;
       await getAllAssetsFn(payload);
     };
+    /**
+     * Call the api from last id
+     */
     const updateFn = async () => {
       assetData.isLoading = true;
       let payload = {

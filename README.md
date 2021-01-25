@@ -1,24 +1,22 @@
-# equipment-dashboard
+#  Equipment Dashboard
+![N|Solid](https://raw.githubusercontent.com/sen2ran/equipment-dashboard/main/screenshots/UI.png)
+### Tech
+* [Vue 3] - The Progressive JavaScript Framework.
+* [Apexcharts.JS] - odern & Interactive Open-source Charts.
+* [tailwindcss] - A utility-first CSS framework.
+* [axios] - Promise based HTTP client for the browser and node.js
 
-## Project setup
-```
-npm install
-```
+### Installation
+Equipment Dashboard requires [Node.js](https://nodejs.org/) to run.
+Install the dependencies and devDependencies and start the server.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+```sh
+$ cd equipment-dashboard
+$ npm install
+$ npm run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Vue 3]: <https://v3.vuejs.org/>
+[Apexcharts.JS]: <https://apexcharts.com/>
+[tailwindcss]: <https://tailwindcss.com/>
+[axios]: <https://www.npmjs.com/package/axios>

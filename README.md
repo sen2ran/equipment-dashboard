@@ -18,5 +18,5 @@ $ npm run serve
 
 [Vue 3]: <https://v3.vuejs.org/>
 [Apexcharts.JS]: <https://apexcharts.com/>
-[tailwindcss]: <https://tailwindcss.com/>
-[axios]: <https://www.npmjs.com/package/axios>
+[Tailwindcss]: <https://tailwindcss.com/>
+[Axios]: <https://www.npmjs.com/package/axios>

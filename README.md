@@ -1,10 +1,12 @@
 #  Equipment Dashboard
 ![N|Solid](https://raw.githubusercontent.com/sen2ran/equipment-dashboard/main/screenshots/UI.png)
+
 ### Tech
+
 * [Vue 3] - The Progressive JavaScript Framework.
 * [Apexcharts.JS] - odern & Interactive Open-source Charts.
-* [tailwindcss] - A utility-first CSS framework.
-* [axios] - Promise based HTTP client for the browser and node.js
+* [Tailwindcss] - A utility-first CSS framework.
+* [Axios] - Promise based HTTP client for the browser and node.js
 
 ### Installation
 Equipment Dashboard requires [Node.js](https://nodejs.org/) to run.

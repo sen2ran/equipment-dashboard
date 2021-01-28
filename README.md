@@ -20,8 +20,6 @@ $ npm install
 $ npm run serve
 ```
 
-Need to install and enable the CORS plugin in the browser
-
 [vue 3]: https://v3.vuejs.org/
 [apexcharts.js]: https://apexcharts.com/
 [tailwindcss]: https://tailwindcss.com/
